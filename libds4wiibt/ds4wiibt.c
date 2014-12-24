@@ -183,8 +183,6 @@ static err_t l2ca_connect_cfm_cb_ctrl_data(void *arg, struct l2cap_pcb *pcb, u16
 	return ERR_OK;
 }
 
-extern struct l2cap_pcb_listen *l2cap_listen_pcbs;
-
 static err_t l2ca_connect_ind_cb_sdp(void *arg, struct l2cap_pcb *pcb, err_t err)
 {
 	struct ds4wiibt_context *ctx = (struct ds4wiibt_context *)arg;
