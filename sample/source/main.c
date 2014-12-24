@@ -37,12 +37,20 @@ int main(int argc, char *argv[])
 		WPAD_ScanPads();
 		u32 pressed = WPAD_ButtonsDown(0);
 		if (pressed & WPAD_BUTTON_HOME) run = 0;
-		if (pressed & WPAD_BUTTON_B) ds4wiibt_disconnect(&ctx);
-		if (pressed & WPAD_BUTTON_1) ds4wiibt_listen(&ctx);
+		
+		if (pressed & WPAD_BUTTON_B) {
+			ds4wiibt_disconnect(&ctx);
+		}
+		
+		if (pressed & WPAD_BUTTON_1) {
+			ds4wiibt_listen(&ctx);
+		}
+		
 		if (ds4wiibt_is_connected(&ctx)) {
 			print_data(&ctx.input);
 			if (ctx.input.PS && ctx.input.OPTIONS) ds4wiibt_disconnect(&ctx);
 		}
+		
 		flip_screen();
 	}
 	ds4wiibt_disconnect(&ctx);
@@ -57,11 +65,7 @@ void conn_cb(void *usrdata)
 void discon_cb(void *usrdata)
 {
 	printf("Controller disconnected.\n");
-	struct l2cap_pcb_listen *lpcb;
-	for(lpcb = l2cap_listen_pcbs; lpcb != NULL; lpcb = lpcb->next) {
-		//printf("\t%d\n", lpcb->psm);
-	}
-	//ds4wiibt_listen(&ctx);
+	//ds4wiibt_listen(&ctx); //Listen again?
 }
 
 void print_data(struct ds4wiibt_input *inp)
