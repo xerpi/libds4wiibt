@@ -1,6 +1,10 @@
 #ifndef DS4WIIBT_H
 #define DS4WIIBT_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <gccore.h>
 #include "l2cap.h"
 
@@ -20,24 +24,24 @@ struct ds4wiibt_input {
 	struct {
 		unsigned char triangle : 1;
 		unsigned char circle   : 1;
-		unsigned char cross	: 1;
+		unsigned char cross    : 1;
 		unsigned char square   : 1;
-		unsigned char dpad	 : 4;
+		unsigned char dpad     : 4;
 	};
 	struct {
-		unsigned char R3	  : 1;
-		unsigned char L3	  : 1;
+		unsigned char R3      : 1;
+		unsigned char L3      : 1;
 		unsigned char OPTIONS : 1;
 		unsigned char SHARE   : 1;
-		unsigned char R2	  : 1;
-		unsigned char L2	  : 1;
-		unsigned char R1	  : 1;
-		unsigned char L1	  : 1;
+		unsigned char R2      : 1;
+		unsigned char L2      : 1;
+		unsigned char R1      : 1;
+		unsigned char L1      : 1;
 	};
 	struct {
 		unsigned char counter : 6;
-		unsigned char TPAD	: 1;
-		unsigned char PS	  : 1;
+		unsigned char TPAD    : 1;
+		unsigned char PS      : 1;
 	};
 	unsigned char triggerL;
 	unsigned char triggerR;
@@ -62,10 +66,10 @@ struct ds4wiibt_input {
 	};
 	unsigned char unk1[5];
 	struct {
-		unsigned char unused	 : 1;
+		unsigned char unused     : 1;
 		unsigned char microphone : 1;
 		unsigned char headphones : 1;
-		unsigned char cable	  : 1;
+		unsigned char cable      : 1;
 		unsigned char batt_level : 4;
 	};
 	unsigned char unk2[2];
@@ -73,15 +77,15 @@ struct ds4wiibt_input {
 	unsigned char packet_count;
 	struct {
 		unsigned int active : 1;
-		unsigned int ID	 : 7;
-		unsigned int X	  : 12;
-		unsigned int Y	  : 12;
+		unsigned int ID     : 7;
+		unsigned int X      : 12;
+		unsigned int Y      : 12;
 	} finger1;
 	struct {
 		unsigned int active : 1;
-		unsigned int ID	 : 7;
-		unsigned int X	  : 12;
-		unsigned int Y	  : 12;
+		unsigned int ID     : 7;
+		unsigned int X      : 12;
+		unsigned int Y      : 12;
 	} finger2;
 } __attribute__((packed, aligned(32)));
 
@@ -123,5 +127,9 @@ void ds4wiibt_disconnect(struct ds4wiibt_context *ctx);
 
 #define ds4wiibt_is_disconnected(ctxp) \
 	((ctxp)->status == DS4WIIBT_STATUS_DISCONNECTED)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
