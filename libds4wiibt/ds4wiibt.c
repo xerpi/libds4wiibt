@@ -227,7 +227,6 @@ static err_t l2ca_disconnect_ind_cb(void *arg, struct l2cap_pcb *pcb, err_t err)
 		ctx->sdp_pcb = NULL;
 
 		memset(&ctx->input, 0, sizeof(ctx->input));
-		correct_input(&ctx->input);
 
 		ctx->status = DS4WIIBT_STATUS_DISCONNECTED;
 		if (ctx->disconnect_cb) {
